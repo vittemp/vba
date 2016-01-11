@@ -11,7 +11,7 @@ Public s_final As String
 '
 
 Public Function draw_a_house(k As Long) As String
-'works pretty good with Consolas font in Excel
+'works pretty good with Consolas or SimHei font in Excel
 
     Dim l_counter       As Long
     Dim l_lines         As Long
@@ -33,7 +33,9 @@ Public Function draw_a_house(k As Long) As String
     s_final = s_final + build_ceiling_and_floor(k)
     
     draw_a_house = s_final
-    
+        
+        
+        
 End Function
 
 Public Function build_in_between(k As Long) As String
