@@ -1,0 +1,8 @@
+"ABC" Like "A?C"
+"A4C Like "A#C" 
+"ABC" Like "A??C" 
+"A123C" Like "A*C" 
+"1B3" Like "1[A-Z]3" 
+"123" Like "1[!A-Z]3" 
+"0207 457 1234" Like "#### ### ####"
+"123" like "1[0-9]3"
