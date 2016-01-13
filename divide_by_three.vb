@@ -7,11 +7,20 @@ Public Function divide_by_three() As Boolean
     Dim arr_temp_array()            As Variant
     Dim arr_current                 As Variant
     Dim arr_elements                As Variant
+    Dim arr_current_copy            As Variant
 
     Dim l_target                    As Long
     Dim l_current_sum               As Long
     Dim l_counter                   As Long
     Dim l_max                       As Long
+    
+    'Required output:
+    'T
+    'F
+    'T
+    'T
+    'F
+    'F
 
     arr_temp_array = Array(1, 3, 4, 5, 3, 2)
     arr_static_array(0) = arr_temp_array
@@ -21,7 +30,8 @@ Public Function divide_by_three() As Boolean
 
     arr_temp_array = Array(5, 1, 7, 4, 3, 6, 1)
     arr_static_array(2) = arr_temp_array
-
+    
+    'This breaks the greedy algorithm
     arr_temp_array = Array(4, 5, 2, 5, 3, 4, 2, 5)
     arr_static_array(3) = arr_temp_array
 
@@ -35,23 +45,25 @@ Public Function divide_by_three() As Boolean
     arr_static_array(6) = arr_temp_array
 
     For Each arr_current In arr_static_array
+        arr_current_copy = arr_current
         l_target = sum_array(arr_current) / 3
 
         If (sum_array(arr_current) / 3) / l_target <> 1 Then
-            Call print_result(0, arr_current, sum_array(arr_current) / 3)
+            Call print_result(0, arr_current_copy, sum_array(arr_current) / 3)
             GoTo place_to_go
         End If
 
         'arr_current = bubble_sort(arr_current) 'Sorting
 
         For l_counter = 0 To 2
+        
             l_current_sum = l_target
             
             While (l_current_sum > 0)
                 arr_elements = return_array_with_smaller_numbers(arr_current, l_current_sum)
                                     
                 If IsArrayEmpty(arr_elements) Then
-                    Call print_result(0, arr_current, l_target)
+                    Call print_result(0, arr_current_copy, l_target)
                     GoTo place_to_go
                 End If
                 
@@ -63,11 +75,11 @@ Public Function divide_by_three() As Boolean
                 l_max = WorksheetFunction.Max(arr_elements)
                 Call Decrement(l_current_sum, l_max)
 
-                arr_elements = remove_from_array(arr_elements, l_max)
+                arr_current = remove_from_array(arr_current, l_max)
                 
             Wend
         Next l_counter
-        Call print_result(1, arr_current, l_target)
+        Call print_result(1, arr_current_copy, l_target)
         
 place_to_go:
     Next arr_current
@@ -308,3 +320,4 @@ Else
 End If
 
 End Function
+
